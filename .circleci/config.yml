@@ -56,3 +56,8 @@ jobs:
             docker push rossshaggywhitehead/$IMAGE_NAME:$TAG
             echo 'pushed'
 
+      - run:
+          name: Deploy app Azure VM
+          command: |
+            ssh -o StrictHostKeyChecking=no $DEPLOY_DESTINATION "./deploy.sh $IMAGE_NAME $TAG"
+
