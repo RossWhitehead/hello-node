@@ -33,5 +33,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
       - run: npm test
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
+      - run: 
+          name: Build and push Docker image
+          command: |
+            docker build -t rossshaggywhitehead/$IMAGE_NAME:$TAG .
+            echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
+            docker push rossshaggywhitehead/$IMAGE_NAME:$TAG
+
