@@ -49,6 +49,8 @@ jobs:
           command: |
             docker build -t rossshaggywhitehead/$IMAGE_NAME:$TAG .
             echo 'built'
+            echo $DOCKER_USER
+            echo $DOCKER_PWD
             docker login -u $DOCKER_USER -p $DOCKER_PWD
             echo 'logged in'
             docker push rossshaggywhitehead/$IMAGE_NAME:$TAG
