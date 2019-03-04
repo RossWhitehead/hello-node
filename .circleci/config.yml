@@ -60,11 +60,5 @@ jobs:
           name: Deploy app Azure VM
           command: |
             ssh -o StrictHostKeyChecking=no $DEPLOY_DESTINATION 
-            docker pull rossshaggywhitehead/$IMAGE_NAME:$TAG 
-            docker stop $IMAGE_NAME 
-            docker rm $IMAGE_NAME  
-            docker rmi rossshaggywhitehead/$IMAGE_NAME:current  
-            docker tag rossshaggywhitehead/$IMAGE_NAME:$TA rossshaggywhitehead/$IMAGE_NAME:current  
-            docker run -d --name $IMAGE_NAME rossshaggywhitehead/$IMAGE_NAME:$TAG
-            
+            ./deploy.sh $IMAGE_NAME $TAG
 
